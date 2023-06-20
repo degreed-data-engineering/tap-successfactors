@@ -1,0 +1,28 @@
+version: 1
+send_anonymous_usage_stats: false
+project_id: 4935d052-aee1-46fa-89f0-a94cdc080064
+plugins:
+  extractors:
+  - name: tap-successfactors
+    namespace: tap-successfactors
+    executable: ./tap-successfactors.sh
+    capabilities:
+    - state
+    - catalog
+    - discover
+    config:
+      client_id: CLIENT-ID
+      client_secret: CLIENT-SECRET
+      user_id: USER-ID
+      companyId: COMPANY-ID
+      userType: USER-TYPE
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl
+environments:
+- name: dev
+  config:
+    plugins:
+      extractors:
+      - name: tap-successfactors
