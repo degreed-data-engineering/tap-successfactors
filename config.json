@@ -1,7 +1,12 @@
 {
+    "base_url": "",
     "client_id": "",
     "client_secret": "",
     "user_id": "",
-    "companyId": "",
-    "$userType": ""
+    "company_id": "",
+    "user_type": "",
+    "language": "",
+    "item_id": "",
+    "item_type_id": "",
+    "revision_date": "",
 }

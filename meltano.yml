@@ -11,11 +11,16 @@ plugins:
     - catalog
     - discover
     config:
+      base_url: BASE-URL
       client_id: CLIENT-ID
       client_secret: CLIENT-SECRET
       user_id: USER-ID
-      companyId: COMPANY-ID
-      userType: USER-TYPE
+      company_id: COMPANY-ID
+      user_type: USER-TYPE
+      language: LANGUAGE
+      item_id: ITEM-ID
+      item_type_id: ITEM-TYPE-ID
+      revision_date: REVISION-DATE
   loaders:
   - name: target-jsonl
     variant: andyh1203
