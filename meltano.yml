@@ -16,7 +16,6 @@ plugins:
       client_secret: CLIENT-SECRET
       user_id: USER-ID
       company_id: COMPANY-ID
-      user_type: USER-TYPE
       language: LANGUAGE
       item_id: ITEM-ID
       item_type_id: ITEM-TYPE-ID
