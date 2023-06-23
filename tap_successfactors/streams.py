@@ -46,6 +46,7 @@ class TapSuccessFactorsStream(RESTStream):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.language = self.config["language"]
+        self.target_user_id = self.config["target_user_id"]
         if not hasattr(self, "admin_token"):
             self.admin_token = CustomAuthenticator().token_request(
                 self.config["client_id"],
@@ -96,7 +97,13 @@ class CatalogsCoursesFeed(TapSuccessFactorsStream):
     name = "catalogs_courses_feed"
     primary_keys = ["componentID"]
     records_jsonpath = "$.value[0:]"
-    path = "/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalog_name}')/CoursesFeed?$filter=criteria/localeID eq '{self.language}'"
+
+    @property
+    def path(self) -> str:
+        """Return API URL path component for stream."""
+        main_path = "/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalog_name}')/CoursesFeed"
+        filters = f"?$filter=criteria/localeID eq '{self.language}'"
+        return main_path + filters
 
     schema = th.PropertiesList(th.Property("componentID", th.StringType)).to_dict()
 
@@ -113,7 +120,13 @@ class CatalogsCurriculaFeed(TapSuccessFactorsStream):
     name = "catalogs_curricula_feed"
     primary_keys = ["curriculumID"]
     records_jsonpath = "$.value[0:]"
-    path = "/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalog_name}')/CurriculaFeed?$filter=criteria/localeID eq '{self.language}'"
+
+    @property
+    def path(self) -> str:
+        """Return API URL path component for stream."""
+        main_path = "/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalog_name}')/CurriculaFeed"
+        filters = f"?$filter=criteria/localeID eq '{self.language}'"
+        return main_path + filters
 
     schema = th.PropertiesList(th.Property("curriculumID", th.StringType)).to_dict()
 
@@ -130,9 +143,61 @@ class CatalogsProgramsFeed(TapSuccessFactorsStream):
     name = "catalogs_programs_feed"
     primary_keys = ["programID"]
     records_jsonpath = "$.value[0:]"
-    path = "/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalog_name}')/ProgramsFeed?$filter=criteria/localeID eq '{self.language}'"
+
+    @property
+    def path(self) -> str:
+        """Return API URL path component for stream."""
+        main_path = "/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalog_name}')/ProgramsFeed"
+        filters = f"?$filter=criteria/localeID eq '{self.language}'"
+        return main_path + filters
 
     schema = th.PropertiesList(th.Property("programID", th.StringType)).to_dict()
+
+    @property
+    def http_headers(self) -> dict:
+        """Return the http headers needed."""
+        headers = {}
+        headers["Authorization"] = f"Bearer {self.admin_token}"
+        return headers
+
+
+class LearningHistorys(TapSuccessFactorsStream):
+    name = "learning_historys"
+    records_jsonpath = "$.value[0:]"
+
+    @property
+    def path(self) -> str:
+        """Return API URL path component for stream."""
+        main_path = (
+            "/learning/odatav4/public/user/userlearning-service/v1/learninghistorys"
+        )
+        filters = (
+            f"?$filter=criteria/targetUserID eq '{self.target_user_id}'&$count=true"
+        )
+        return main_path + filters
+
+    schema = th.PropertiesList(th.Property("componentTypeID", th.StringType)).to_dict()
+
+    @property
+    def http_headers(self) -> dict:
+        """Return the http headers needed."""
+        headers = {}
+        headers["Authorization"] = f"Bearer {self.admin_token}"
+        return headers
+
+
+class UserTodoLearningItems(TapSuccessFactorsStream):
+    name = "user_todo_learning_items"
+    records_jsonpath = "$.value[0:]"
+
+    @property
+    def path(self) -> str:
+        """Return API URL path component for stream."""
+        main_path = "/learning/odatav4/public/user/learningplan-service/v1/UserTodoLearningItems"
+        filters = f"?$filter=criteria/maxRowNum eq 999999 and criteria/targetUserID eq '{self.target_user_id}'"
+        return main_path + filters
+
+    schema = th.PropertiesList(th.Property("sku", th.StringType)).to_dict()
 
     @property
     def http_headers(self) -> dict:

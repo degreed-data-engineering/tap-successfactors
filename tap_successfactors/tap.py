@@ -8,6 +8,8 @@ from tap_successfactors.streams import (
     CatalogsCoursesFeed,
     CatalogsCurriculaFeed,
     CatalogsProgramsFeed,
+    LearningHistorys,
+    UserTodoLearningItems,
 )
 
 PLUGIN_NAME = "tap-successfactors"
@@ -17,6 +19,8 @@ STREAM_TYPES = [
     CatalogsCoursesFeed,
     CatalogsCurriculaFeed,
     CatalogsProgramsFeed,
+    LearningHistorys,
+    UserTodoLearningItems,
 ]
 
 

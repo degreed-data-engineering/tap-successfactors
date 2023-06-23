@@ -20,6 +20,7 @@ plugins:
       item_id: ITEM-ID
       item_type_id: ITEM-TYPE-ID
       revision_date: REVISION-DATE
+      target_user_id: TARGET-USER-ID
   loaders:
   - name: target-jsonl
     variant: andyh1203
