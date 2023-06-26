@@ -1,0 +1,89 @@
+{
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "string"
+        },
+        "componentID": {
+            "type": "string"
+        },
+        "componentTypeID": {
+            "type": "string"
+        },
+        "revisionDate": {
+            "type": "integer"
+        },
+        "componentClassification": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "domainID": {
+            "type": "string"
+        },
+        "domainDesc": {
+            "type": "string"
+        },
+        "catalogItemFlagID": {
+            "type": "string"
+        },
+        "catalogItemFlagUntilDate": {
+            "type": "integer"
+        },
+        "defaultPrice": {
+            "type": "number"
+        },
+        "defaultCurrencyCode": {
+            "type": "string"
+        },
+        "audience": {
+            "type": "string"
+        },
+        "sourceID": {
+            "type": "string"
+        },
+        "sourceDesc": {
+            "type": "string"
+        },
+        "deliveryMethodID": {
+            "type": "string"
+        },
+        "deliveryMethodDesc": {
+            "type": "string"
+        },
+        "totalLength": {
+            "type": "number"
+        },
+        "creditHours": {
+            "type": "number"
+        },
+        "cpeHours": {
+            "type": "number"
+        },
+        "contactHours": {
+            "type": "number"
+        },
+        "thumbnailURI": {
+            "type": "string"
+        },
+        "active": {
+            "type": "boolean"
+        },
+        "mobileReady": {
+            "type": "string"
+        },
+        "action": {
+            "type": "string"
+        },
+        "deeplink": {
+            "type": "string"
+        },
+        "SubjectAreasFeed": {
+            "type": "array"
+        }
+    }
+}

@@ -9,6 +9,7 @@ from tap_successfactors.streams import (
     CatalogsCurriculaFeed,
     CatalogsProgramsFeed,
     LearningHistorys,
+    ScheduledOfferings,
     UserTodoLearningItems,
 )
 
@@ -20,6 +21,7 @@ STREAM_TYPES = [
     CatalogsCurriculaFeed,
     CatalogsProgramsFeed,
     LearningHistorys,
+    ScheduledOfferings,
     UserTodoLearningItems,
 ]
 

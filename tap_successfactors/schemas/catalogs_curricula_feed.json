@@ -1,0 +1,29 @@
+{
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "string"
+        },
+        "curriculumID": {
+            "type": "string"
+        },
+        "curriculumTitle": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "domainID": {
+            "type": "string"
+        },
+        "domainDesc": {
+            "type": "string"
+        },
+        "thumbnailURI": {
+            "type": "string"
+        },
+        "action": {
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,107 @@
+{
+    "type": "object",
+    "properties": {
+        "componentTypeID": {
+            "type": "string"
+        },
+        "componentID": {
+            "type": "string"
+        },
+        "revisionDate": {
+            "type": "integer"
+        },
+        "title": {
+            "type": "string"
+        },
+        "revisionNumber": {
+            "type": "string"
+        },
+        "completionStatusID": {
+            "type": "string"
+        },
+        "provideCredit": {
+            "type": "boolean"
+        },
+        "studentComponentID": {
+            "type": "integer"
+        },
+        "instructorName": {
+            "type": "string"
+        },
+        "grade": {
+            "type": "string"
+        },
+        "totalHours": {
+            "type": "number"
+        },
+        "creditHours": {
+            "type": "number"
+        },
+        "contactHours": {
+            "type": "number"
+        },
+        "cpeHours": {
+            "type": "number"
+        },
+        "comments": {
+            "type": "string"
+        },
+        "esigUsername": {
+            "type": "string"
+        },
+        "lastUpdateTimestamp": {
+            "type": "integer"
+        },
+        "esigMeaningCode": {
+            "type": "string"
+        },
+        "scheduleID": {
+            "type": "integer"
+        },
+        "componentKey": {
+            "type": "string"
+        },
+        "reviewContentAllowed": {
+            "type": "boolean"
+        },
+        "rating": {
+            "type": "number"
+        },
+        "seqNum": {
+            "type": "integer"
+        },
+        "enableRating": {
+            "type": "boolean"
+        },
+        "formattedRevisionDate": {
+            "type": "string"
+        },
+        "completionDate": {
+            "type": "integer"
+        },
+        "status": {
+            "type": "string"
+        },
+        "ratingDate": {
+            "type": "integer"
+        },
+        "ratingPending": {
+            "type": "boolean"
+        },
+        "lastCompletionDate": {
+            "type": "integer"
+        },
+        "certificateLink": {
+            "type": "string"
+        },
+        "onlineContentLink": {
+            "type": "string"
+        },
+        "criteria": {
+            "type": "string"
+        },
+        "embeddableDeeplink": {
+            "type": "string"
+        }
+    }
+}

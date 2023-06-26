@@ -1,0 +1,101 @@
+{
+    "type": "object",
+    "properties": {
+        "scheduleID": {
+            "type": "integer"
+        },
+        "description": {
+            "type": "integer"
+        },
+        "componentTypeID": {
+            "type": "string"
+        },
+        "componentID": {
+            "type": "string"
+        },
+        "revisionDate": {
+            "type": "integer"
+        },
+        "price": {
+            "type": "number"
+        },
+        "instructors": {
+            "type": "array"
+        },
+        "startDateTime": {
+            "type": "integer"
+        },
+        "endDateTime": {
+            "type": "integer"
+        },
+        "days": {
+            "type": "integer"
+        },
+        "locationDescription": {
+            "type": "string"
+        },
+        "facilityDescription": {
+            "type": "string"
+        },
+        "scheduleStatus": {
+            "type": "integer"
+        },
+        "selfEnrollable": {
+            "type": "boolean"
+        },
+        "timeZoneID": {
+            "type": "string"
+        },
+        "displayInScheduleTimeZone": {
+            "type": "boolean"
+        },
+        "maxEnrollment": {
+            "type": "integer"
+        },
+        "enrolledCount": {
+            "type": "integer"
+        },
+        "enrollStatusTypeID": {
+            "type": "string"
+        },
+        "enrollSeatID": {
+            "type": "integer"
+        },
+        "addUser": {
+            "type": "string"
+        },
+        "userCanWaitlist": {
+            "type": "boolean"
+        },
+        "chargebackMethod": {
+            "type": "string"
+        },
+        "itemChargeBackMethod": {
+            "type": "string"
+        },
+        "scheduleCanOverridePrice": {
+            "type": "boolean"
+        },
+        "timeZoneLabelValue": {
+            "type": "string"
+        },
+        "scheduleStatusValue": {
+            "type": "string"
+        },
+        "currencyCode": {
+            "type": "string"
+        },
+        "currencyDesc": {
+            "type": "string"
+        },
+        "availableSeatCount": {
+            "type": "integer"
+        },
+        "scheduledOfferingDeeplink": {
+            "type": "string"
+        },
+        "lisCriteria": {
+            "type": "string"
+        }
+    }
+}

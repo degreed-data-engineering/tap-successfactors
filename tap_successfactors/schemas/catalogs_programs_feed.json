@@ -1,0 +1,29 @@
+{
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "string"
+        },
+        "programID": {
+            "type": "string"
+        },
+        "programTitle": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "domainID": {
+            "type": "string"
+        },
+        "domainDesc": {
+            "type": "string"
+        },
+        "thumbnailURI": {
+            "type": "string"
+        },
+        "action": {
+            "type": "string"
+        }
+    }
+}

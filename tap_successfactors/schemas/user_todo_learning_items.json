@@ -1,0 +1,194 @@
+{
+    "type": "object",
+    "properties": {
+        "sku": {
+            "type": "string"
+        },
+        "cpnt_classification": {
+            "type": "string"
+        },
+        "isUserRequestsEnabled": {
+            "type": "boolean"
+        },
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        },
+        "userID": {
+            "type": "string"
+        },
+        "personGUID": {
+            "type": "string"
+        },
+        "personExternalID": {
+            "type": "string"
+        },
+        "componentTypeID": {
+            "type": "string"
+        },
+        "componentTypeDesc": {
+            "type": "string"
+        },
+        "componentID": {
+            "type": "string"
+        },
+        "componentKey": {
+            "type": "integer"
+        },
+        "componentLength": {
+            "type": "number"
+        },
+        "contactHours": {
+            "type": "number"
+        },
+        "creditHours": {
+            "type": "number"
+        },
+        "cpeHours": {
+            "type": "number"
+        },
+        "revisionDate": {
+            "type": "integer"
+        },
+        "assignedDate": {
+            "type": "integer"
+        },
+        "availableNewRevision": {
+            "type": "boolean"
+        },
+        "revisionNumber": {
+            "type": "string"
+        },
+        "requiredDate": {
+            "type": "integer"
+        },
+        "daysRemaining": {
+            "type": "integer"
+        },
+        "addUser": {
+            "type": "string"
+        },
+        "addUserName": {
+            "type": "string"
+        },
+        "addUserTypeLabelID": {
+            "type": "string"
+        },
+        "orderItemID": {
+            "type": "integer"
+        },
+        "usedOrderTicketNumber": {
+            "type": "string"
+        },
+        "usedOrderTicketSequence": {
+            "type": "integer"
+        },
+        "onlineLaunched": {
+            "type": "boolean"
+        },
+        "origin": {
+            "type": "string"
+        },
+        "cdpGoalID": {
+            "type": "string"
+        },
+        "seqNumber": {
+            "type": "integer"
+        },
+        "scheduleID": {
+            "type": "integer"
+        },
+        "qualificationID": {
+            "type": "string"
+        },
+        "rootQualificationID": {
+            "type": "string"
+        },
+        "qualTitle": {
+            "type": "string"
+        },
+        "isRequired": {
+            "type": "boolean"
+        },
+        "orderItemStatusTypeID": {
+            "type": "string"
+        },
+        "showInCatalog": {
+            "type": "boolean"
+        },
+        "requirementTypeDescription": {
+            "type": "string"
+        },
+        "requirementTypeId": {
+            "type": "string"
+        },
+        "hasOnlinePart": {
+            "type": "boolean"
+        },
+        "itemDetailsDeeplink": {
+            "type": "string"
+        },
+        "courseDeeplink": {
+            "type": "string"
+        },
+        "criteria": {
+            "type": "string"
+        },
+        "linkedSchedules": {
+            "type": "array"
+        },
+        "programType": {
+            "type": "string"
+        },
+        "programEndDate": {
+            "type": "integer"
+        },
+        "programStartDate": {
+            "type": "integer"
+        },
+        "programDuration": {
+            "type": "integer"
+        },
+        "programDurationType": {
+            "type": "string"
+        },
+        "programDeeplink": {
+            "type": "string"
+        },
+        "vlsLink": {
+            "type": "string"
+        },
+        "studentSurveyID": {
+            "type": "integer"
+        },
+        "itemSurveyID": {
+            "type": "integer"
+        },
+        "surveyID": {
+            "type": "string"
+        },
+        "surveyLevel": {
+            "type": "integer"
+        },
+        "surveydesc": {
+            "type": "string"
+        },
+        "surveyStatusID": {
+            "type": "string"
+        },
+        "surveyDeepLink": {
+            "type": "string"
+        },
+        "learnerActions": {
+            "type": "array"
+        },
+        "embeddableDeeplink": {
+            "type": "string"
+        }
+    }
+}
