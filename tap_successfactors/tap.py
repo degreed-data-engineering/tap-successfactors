@@ -31,17 +31,40 @@ class TapSuccessfactors(Tap):
 
     name = "tap-successfactors"
     config_jsonschema = th.PropertiesList(
-        th.Property("base_url", th.StringType, required=True, description=""),
-        th.Property("client_id", th.StringType, required=True, description="Client ID"),
+        th.Property("base_url", th.StringType, required=True, description="Base URL"),
+        th.Property(
+            "client_id",
+            th.StringType,
+            required=True,
+            description="Client ID (often equal to company_id)",
+        ),
         th.Property(
             "client_secret", th.StringType, required=True, description="Client Secret"
         ),
-        th.Property("user_id", th.StringType, required=True, description=""),
-        th.Property("company_id", th.StringType, required=True, description=""),
-        th.Property("language", th.StringType, required=True, description=""),
-        th.Property("item_id", th.StringType, required=True, description=""),
-        th.Property("item_type_id", th.StringType, required=True, description=""),
-        th.Property("revision_date", th.StringType, required=True, description=""),
+        th.Property(
+            "user_id",
+            th.StringType,
+            required=True,
+            description="User ID (i.e. degreed_api)",
+        ),
+        th.Property(
+            "company_id",
+            th.StringType,
+            required=True,
+            description="Company ID (often equal to client_id)",
+        ),
+        th.Property(
+            "language",
+            th.StringType,
+            required=True,
+            description="Language (i.e. English)",
+        ),
+        th.Property(
+            "target_user_id",
+            th.StringType,
+            required=True,
+            description="Target user ID (i.e. sfadmin)",
+        ),
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:

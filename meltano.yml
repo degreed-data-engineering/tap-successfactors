@@ -17,9 +17,6 @@ plugins:
       user_id: USER-ID
       company_id: COMPANY-ID
       language: LANGUAGE
-      item_id: ITEM-ID
-      item_type_id: ITEM-TYPE-ID
-      revision_date: REVISION-DATE
       target_user_id: TARGET-USER-ID
   loaders:
   - name: target-jsonl
