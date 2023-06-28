@@ -5,10 +5,12 @@ import requests
 import json
 import urllib.parse
 
+from http import HTTPStatus
 from pathlib import Path
-from typing import Dict, Optional, Any, Iterable
-from singer_sdk.exceptions import RetriableAPIError
+from singer_sdk.exceptions import RetriableAPIError, FatalAPIError
 from singer_sdk.streams import RESTStream
+from typing import Optional
+from urllib.parse import urlparse
 
 logging.basicConfig(level=logging.INFO)
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
@@ -33,11 +35,15 @@ def token_request(client_id, client_secret, base_url, user_id, company_id, userT
         data=payload,
         auth=requests.auth.HTTPBasicAuth(client_id, client_secret),
     )
-    return response.json()["access_token"]
+    logging.info(f"Token created for user type: {userType}")
+    access_token = "Bearer " + response.json()["access_token"]
+    return access_token
 
 
 class TapSuccessFactorsStream(RESTStream):
     """Generic SuccessFactors stream class."""
+
+    extra_retry_statuses: list[int] = [HTTPStatus.TOO_MANY_REQUESTS]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -71,42 +77,80 @@ class TapSuccessFactorsStream(RESTStream):
     def http_headers(self) -> dict:
         """Return the http headers needed."""
         headers = {}
-        headers["Authorization"] = f"Bearer {self.admin_token}"
+        headers["Authorization"] = self.admin_token
         return headers
+
+    def response_error_message(self, response: requests.Response) -> str:
+        """Build error message for invalid http statuses."""
+        full_path = urlparse(response.url).path or self.path
+        error_type = (
+            "Client"
+            if HTTPStatus.BAD_REQUEST  # 400
+            <= response.status_code
+            < HTTPStatus.INTERNAL_SERVER_ERROR  # 500
+            else "Server"
+        )
+
+        return (
+            f"{response.status_code} {error_type} Error: "
+            f"{response.reason} for path: {full_path}"
+        )
 
     def validate_response(self, response):
         data = response.json()
-        if "error" in data:
+
+        if (
+            response.status_code in self.extra_retry_statuses
+            or HTTPStatus.INTERNAL_SERVER_ERROR  # 500
+            <= response.status_code
+            <= max(HTTPStatus)  # 511
+        ):
             if (
-                "No search results for provided search criteria"
+                "message" in data["error"]
+                and "No search results for provided search criteria"
                 in data["error"]["message"]
-            ):  # mainly used by ScheduledOfferings
+            ):  # mainly used by ScheduledOfferings in case of no results found for search criteria
                 logging.warning(
                     f"No search results for provided search criteria. URL: {urllib.parse.unquote(response.request.url)}"
                 )
                 pass
-            elif (
+            else:
+                msg = self.response_error_message(response)
+                raise RetriableAPIError(msg, response)
+
+        if (
+            HTTPStatus.BAD_REQUEST  # 400
+            <= response.status_code
+            < HTTPStatus.INTERNAL_SERVER_ERROR  # 500
+        ):
+            if (
                 "error_description" in data
                 and data["error_description"] == "The token has expired."
             ):
-                logging.warn("Token expired, refreshing")
-                self.admin_token = token_request(
+                logging.warning("Token expired")
+                if response.request.headers["Authorization"] == self.admin_token:
+                    user_type = "admin"
+                elif response.request.headers["Authorization"] == self.user_token:
+                    user_type = "user"
+                logging.warning(f"Refreshing {user_type} token")
+                new_token = token_request(
                     self.config["client_id"],
                     self.config["client_secret"],
                     self.config["base_url"],
                     self.config["user_id"],
                     self.config["company_id"],
-                    "admin",
+                    user_type,
                 )
-                self.user_token = token_request(
-                    self.config["client_id"],
-                    self.config["client_secret"],
-                    self.config["base_url"],
-                    self.config["user_id"],
-                    self.config["company_id"],
-                    "user",
-                )
-                raise RetriableAPIError
+                if user_type == "admin":
+                    self.admin_token = new_token
+                elif user_type == "user":
+                    self.user_token = new_token
+                response.request.headers["Authorization"] = new_token
+                msg = self.response_error_message(response)
+                raise RetriableAPIError(msg, response)
+            else:
+                msg = self.response_error_message(response)
+                raise FatalAPIError(msg)
 
 
 class Catalogs(TapSuccessFactorsStream):
@@ -202,7 +246,7 @@ class ScheduledOfferings(TapSuccessFactorsStream):
     def http_headers(self) -> dict:
         """Return the http headers needed."""
         headers = {}
-        headers["Authorization"] = f"Bearer {self.user_token}"
+        headers["Authorization"] = f"{self.user_token}"
         return headers
 
 
