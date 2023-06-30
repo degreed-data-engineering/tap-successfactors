@@ -43,8 +43,6 @@ def token_request(client_id, client_secret, base_url, user_id, company_id, userT
 class TapSuccessFactorsStream(RESTStream):
     """Generic SuccessFactors stream class."""
 
-    extra_retry_statuses: list[int] = [HTTPStatus.TOO_MANY_REQUESTS]
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.language = self.config["language"]
@@ -100,7 +98,7 @@ class TapSuccessFactorsStream(RESTStream):
         data = response.json()
 
         if (
-            response.status_code in self.extra_retry_statuses
+            response.status_code == HTTPStatus.TOO_MANY_REQUESTS  # 429
             or HTTPStatus.INTERNAL_SERVER_ERROR  # 500
             <= response.status_code
             <= max(HTTPStatus)  # 511
