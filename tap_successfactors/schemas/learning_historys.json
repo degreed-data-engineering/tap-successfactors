@@ -201,7 +201,9 @@
         },
         "embeddableDeeplink": {
             "type": [
-                "string"
-            }
+                "string",
+                "null"
+            ]
         }
     }
+}
