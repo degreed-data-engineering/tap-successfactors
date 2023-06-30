@@ -2,28 +2,52 @@
     "type": "object",
     "properties": {
         "criteria": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "programID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "programTitle": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "description": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "domainID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "domainDesc": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "thumbnailURI": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "action": {
-            "type": "string"
-        }
+            "type": [
+                "string",
+                "null"
+            ]
+        },
     }
 }

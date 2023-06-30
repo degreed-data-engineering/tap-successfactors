@@ -2,106 +2,206 @@
     "type": "object",
     "properties": {
         "componentTypeID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "componentID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "revisionDate": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "title": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "revisionNumber": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "completionStatusID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "provideCredit": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "studentComponentID": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "instructorName": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "grade": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "totalHours": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "creditHours": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "contactHours": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "cpeHours": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "comments": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "esigUsername": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "lastUpdateTimestamp": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "esigMeaningCode": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "scheduleID": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "componentKey": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "reviewContentAllowed": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "rating": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "seqNum": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "enableRating": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "formattedRevisionDate": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "completionDate": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "status": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "ratingDate": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "ratingPending": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "lastCompletionDate": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "certificateLink": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "onlineContentLink": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "criteria": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "embeddableDeeplink": {
-            "type": "string"
+            "type": [
+                "string"
+            }
         }
     }
-}

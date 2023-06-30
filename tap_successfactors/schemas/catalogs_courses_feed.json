@@ -2,88 +2,172 @@
     "type": "object",
     "properties": {
         "criteria": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "componentID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "componentTypeID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "revisionDate": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "componentClassification": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "title": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "description": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "domainID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "domainDesc": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "catalogItemFlagID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "catalogItemFlagUntilDate": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "defaultPrice": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "defaultCurrencyCode": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "audience": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "sourceID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "sourceDesc": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "deliveryMethodID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "deliveryMethodDesc": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "totalLength": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "creditHours": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "cpeHours": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "contactHours": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "thumbnailURI": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "active": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "mobileReady": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "action": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "deeplink": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "SubjectAreasFeed": {
-            "type": "array"
+            "type": [
+                "array",
+                "null"
+            ]
         }
     }
 }

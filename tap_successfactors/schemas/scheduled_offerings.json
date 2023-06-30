@@ -2,100 +2,196 @@
     "type": "object",
     "properties": {
         "scheduleID": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "description": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "componentTypeID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "componentID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "revisionDate": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "price": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "instructors": {
-            "type": "array"
+            "type": [
+                "array",
+                "null"
+            ]
         },
         "startDateTime": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "endDateTime": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "days": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "locationDescription": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "facilityDescription": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "scheduleStatus": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "selfEnrollable": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "timeZoneID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "displayInScheduleTimeZone": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "maxEnrollment": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "enrolledCount": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "enrollStatusTypeID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "enrollSeatID": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "addUser": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "userCanWaitlist": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "chargebackMethod": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "itemChargeBackMethod": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "scheduleCanOverridePrice": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "timeZoneLabelValue": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "scheduleStatusValue": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "currencyCode": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "currencyDesc": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "availableSeatCount": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "scheduledOfferingDeeplink": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "lisCriteria": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         }
     }
 }

@@ -2,193 +2,382 @@
     "type": "object",
     "properties": {
         "sku": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "cpnt_classification": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "isUserRequestsEnabled": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "title": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "description": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "status": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "userID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "personGUID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "personExternalID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "componentTypeID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "componentTypeDesc": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "componentID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "componentKey": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "componentLength": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "contactHours": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "creditHours": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "cpeHours": {
-            "type": "number"
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "revisionDate": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "assignedDate": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "availableNewRevision": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "revisionNumber": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "requiredDate": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "daysRemaining": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "addUser": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "addUserName": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "addUserTypeLabelID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "orderItemID": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "usedOrderTicketNumber": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "usedOrderTicketSequence": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "onlineLaunched": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "origin": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "cdpGoalID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "seqNumber": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "scheduleID": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "qualificationID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "rootQualificationID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "qualTitle": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "isRequired": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "orderItemStatusTypeID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "showInCatalog": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "requirementTypeDescription": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "requirementTypeId": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "hasOnlinePart": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "itemDetailsDeeplink": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "courseDeeplink": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "criteria": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "linkedSchedules": {
-            "type": "array"
+            "type": [
+                "array",
+                "null"
+            ]
         },
         "programType": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "programEndDate": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "programStartDate": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "programDuration": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "programDurationType": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "programDeeplink": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "vlsLink": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "studentSurveyID": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "itemSurveyID": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "surveyID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "surveyLevel": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "surveydesc": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "surveyStatusID": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "surveyDeepLink": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "learnerActions": {
-            "type": "array"
+            "type": [
+                "array",
+                "null"
+            ]
         },
         "embeddableDeeplink": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         }
     }
 }
