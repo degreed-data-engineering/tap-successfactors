@@ -135,7 +135,7 @@
         },
         "seqNum": {
             "type": [
-                "integer",
+                "string",
                 "null"
             ]
         },
