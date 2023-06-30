@@ -1,6 +1,12 @@
 {
     "type": "object",
     "properties": {
+        "catalog_name": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
         "criteria": {
             "type": [
                 "string",
