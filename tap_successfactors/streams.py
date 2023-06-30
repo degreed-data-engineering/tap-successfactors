@@ -218,6 +218,7 @@ class CatalogsProgramsFeed(TapSuccessFactorsStream):
 
 class LearningHistorys(TapSuccessFactorsStream):
     name = "learning_historys"
+    primary_keys = ["componentID"]
     records_jsonpath = "$.value[0:]"
     schema_filepath = SCHEMAS_DIR / "learning_historys.json"
 
@@ -236,6 +237,7 @@ class LearningHistorys(TapSuccessFactorsStream):
 class ScheduledOfferings(TapSuccessFactorsStream):
     parent_stream_type = CatalogsCoursesFeed
     name = "scheduled_offerings"
+    primary_keys = ["scheduleID"]
     records_jsonpath = "$.value[0:]"
     path = "/learning/odatav4/public/user/learningplan-service/v1/Scheduledofferings?$filter=lisCriteria/itemID eq '{componentID}' and lisCriteria/itemTypeID eq '{componentTypeID}' and lisCriteria/revisionDate eq {revisionDate}"
     schema_filepath = SCHEMAS_DIR / "scheduled_offerings.json"
@@ -250,6 +252,7 @@ class ScheduledOfferings(TapSuccessFactorsStream):
 
 class UserTodoLearningItems(TapSuccessFactorsStream):
     name = "user_todo_learning_items"
+    primary_keys = ["sku"]
     records_jsonpath = "$.value[0:]"
     schema_filepath = SCHEMAS_DIR / "user_todo_learning_items.json"
 
