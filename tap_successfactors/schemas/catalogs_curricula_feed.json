@@ -1,0 +1,59 @@
+{
+    "type": "object",
+    "properties": {
+        "catalogID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "criteria": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "curriculumID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "curriculumTitle": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "description": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "domainID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "domainDesc": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "thumbnailURI": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "action": {
+            "type": [
+                "string",
+                "null"
+            ]
+        }
+    }
+}

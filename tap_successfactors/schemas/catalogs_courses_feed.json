@@ -1,0 +1,179 @@
+{
+    "type": "object",
+    "properties": {
+        "catalogID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "criteria": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "componentID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "componentTypeID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "revisionDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "componentClassification": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "title": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "description": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "domainID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "domainDesc": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "catalogItemFlagID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "catalogItemFlagUntilDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "defaultPrice": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "defaultCurrencyCode": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "audience": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "sourceID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "sourceDesc": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "deliveryMethodID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "deliveryMethodDesc": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "totalLength": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "creditHours": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "cpeHours": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "contactHours": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "thumbnailURI": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "active": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "mobileReady": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "action": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "deeplink": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "SubjectAreasFeed": {
+            "type": [
+                "array",
+                "null"
+            ]
+        }
+    }
+}

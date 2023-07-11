@@ -1,0 +1,197 @@
+{
+    "type": "object",
+    "properties": {
+        "scheduleID": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "description": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "componentTypeID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "componentID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "revisionDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "price": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "instructors": {
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "startDateTime": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "endDateTime": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "days": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "locationDescription": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "facilityDescription": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "scheduleStatus": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "selfEnrollable": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "timeZoneID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "displayInScheduleTimeZone": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "maxEnrollment": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "enrolledCount": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "enrollStatusTypeID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "enrollSeatID": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "addUser": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "userCanWaitlist": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "chargebackMethod": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "itemChargeBackMethod": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "scheduleCanOverridePrice": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "timeZoneLabelValue": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "scheduleStatusValue": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "currencyCode": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "currencyDesc": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "availableSeatCount": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "scheduledOfferingDeeplink": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "lisCriteria": {
+            "type": [
+                "string",
+                "null"
+            ]
+        }
+    }
+}

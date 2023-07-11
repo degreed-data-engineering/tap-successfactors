@@ -1,0 +1,383 @@
+{
+    "type": "object",
+    "properties": {
+        "sku": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "cpnt_classification": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "isUserRequestsEnabled": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "title": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "description": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "status": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "userID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "personGUID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "personExternalID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "componentTypeID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "componentTypeDesc": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "componentID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "componentKey": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "componentLength": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "contactHours": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "creditHours": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "cpeHours": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "revisionDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "assignedDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "availableNewRevision": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "revisionNumber": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "requiredDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "daysRemaining": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "addUser": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "addUserName": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "addUserTypeLabelID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "orderItemID": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "usedOrderTicketNumber": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "usedOrderTicketSequence": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "onlineLaunched": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "origin": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "cdpGoalID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "seqNumber": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "scheduleID": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "qualificationID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "rootQualificationID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "qualTitle": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "isRequired": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "orderItemStatusTypeID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "showInCatalog": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "requirementTypeDescription": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "requirementTypeId": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "hasOnlinePart": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "itemDetailsDeeplink": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "courseDeeplink": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "criteria": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "linkedSchedules": {
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "programType": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "programEndDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "programStartDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "programDuration": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "programDurationType": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "programDeeplink": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "vlsLink": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "studentSurveyID": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "itemSurveyID": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "surveyID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "surveyLevel": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "surveydesc": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "surveyStatusID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "surveyDeepLink": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "learnerActions": {
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "embeddableDeeplink": {
+            "type": [
+                "string",
+                "null"
+            ]
+        }
+    }
+}

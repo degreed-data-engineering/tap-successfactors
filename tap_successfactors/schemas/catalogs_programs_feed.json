@@ -1,0 +1,59 @@
+{
+    "type": "object",
+    "properties": {
+        "catalog_name": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "criteria": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "programID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "programTitle": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "description": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "domainID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "domainDesc": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "thumbnailURI": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "action": {
+            "type": [
+                "string",
+                "null"
+            ]
+        }
+    }
+}

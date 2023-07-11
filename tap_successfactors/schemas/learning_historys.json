@@ -1,0 +1,209 @@
+{
+    "type": "object",
+    "properties": {
+        "componentTypeID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "componentID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "revisionDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "title": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "revisionNumber": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "completionStatusID": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "provideCredit": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "studentComponentID": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "instructorName": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "grade": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "totalHours": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "creditHours": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "contactHours": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "cpeHours": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "comments": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "esigUsername": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "lastUpdateTimestamp": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "esigMeaningCode": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "scheduleID": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "componentKey": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "reviewContentAllowed": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "rating": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "seqNum": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "enableRating": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "formattedRevisionDate": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "completionDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "status": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "ratingDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "ratingPending": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "lastCompletionDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "certificateLink": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "onlineContentLink": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "criteria": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "embeddableDeeplink": {
+            "type": [
+                "string",
+                "null"
+            ]
+        }
+    }
+}
