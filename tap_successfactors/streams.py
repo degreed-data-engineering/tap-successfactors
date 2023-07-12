@@ -218,6 +218,7 @@ class CatalogsProgramsFeed(TapSuccessFactorsStream):
 
 class LearningHistorys(TapSuccessFactorsStream):
     name = "learning_historys"
+    primary_keys = ["componentID"]
     records_jsonpath = "$.value[0:]"
     schema_filepath = SCHEMAS_DIR / "learning_historys.json"
 
