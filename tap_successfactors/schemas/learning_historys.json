@@ -204,6 +204,12 @@
                 "string",
                 "null"
             ]
+        },
+        "fromDate": {
+            "type": [
+                "integer",
+                "null"
+            ]
         }
     }
 }

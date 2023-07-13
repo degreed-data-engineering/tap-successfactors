@@ -3,13 +3,14 @@
 import logging
 import requests
 import json
+import time
 import urllib.parse
 
 from http import HTTPStatus
 from pathlib import Path
 from singer_sdk.exceptions import RetriableAPIError, FatalAPIError
 from singer_sdk.streams import RESTStream
-from typing import Optional
+from typing import Optional, Dict, Any
 from urllib.parse import urlparse
 
 logging.basicConfig(level=logging.INFO)
@@ -221,6 +222,7 @@ class LearningHistorys(TapSuccessFactorsStream):
     primary_keys = ["componentID"]
     records_jsonpath = "$.value[0:]"
     schema_filepath = SCHEMAS_DIR / "learning_historys.json"
+    replication_key = "fromDate"
 
     @property
     def path(self) -> str:
@@ -228,10 +230,26 @@ class LearningHistorys(TapSuccessFactorsStream):
         main_path = (
             "/learning/odatav4/public/user/userlearning-service/v1/learninghistorys"
         )
-        filters = (
-            f"?$filter=criteria/targetUserID eq '{self.target_user_id}'&$count=true"
-        )
+
+        self.to_date = int(time.time() * 1000)
+
+        if "from_date" in self.config:
+            self.from_date = self.config["from_date"]
+            logging.warning("A")
+        else:
+            if "replication_key_value" in self.stream_state:
+                self.from_date = self.stream_state["replication_key_value"]
+                logging.warning("B")
+            else:
+                self.from_date = 1325372400000  # 2012-01-01T00:00:00.000Z
+                logging.warning("C")
+
+        filters = f"?$filter=criteria/targetUserID eq '{self.target_user_id}' and criteria/fromDate eq {self.from_date} &$count=true"
         return main_path + filters
+
+    def post_process(self, row: dict, context: Optional[dict]) -> dict:
+        row["fromDate"] = self.to_date
+        return row
 
 
 class ScheduledOfferings(TapSuccessFactorsStream):

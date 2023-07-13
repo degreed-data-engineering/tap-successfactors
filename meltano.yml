@@ -18,6 +18,7 @@ plugins:
       company_id: COMPANY-ID
       language: LANGUAGE
       target_user_id: TARGET-USER-ID
+      from_date: FROM-DATE
   loaders:
   - name: target-jsonl
     variant: andyh1203
