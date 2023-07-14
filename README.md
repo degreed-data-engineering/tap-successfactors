@@ -39,6 +39,12 @@ This tap successfactors was created by Degreed to be used for extracting data vi
             required=True,
             description="Target user ID (i.e. sfadmin)",
         ),
+        th.Property(
+            "from_date",
+            th.IntegerType,
+            required=False,
+            description="Datetime (specified in unix milliseconds) to use as the start of the date range for the tap",
+        ),
     ).to_dict()
 ```
 ## Testing locally
