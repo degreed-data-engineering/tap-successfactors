@@ -1,5 +1,6 @@
 """Stream class for tap-successfactors."""
 
+import datetime
 import logging
 import requests
 import json
@@ -231,18 +232,20 @@ class LearningHistorys(TapSuccessFactorsStream):
             "/learning/odatav4/public/user/userlearning-service/v1/learninghistorys"
         )
 
-        self.to_date = int(time.time() * 1000)
+        self.to_date = int(time.time())
 
         if "from_date" in self.config:
             self.from_date = self.config["from_date"]
-            logging.warning("A")
         else:
             if "replication_key_value" in self.stream_state:
                 self.from_date = self.stream_state["replication_key_value"]
-                logging.warning("B")
             else:
-                self.from_date = 1325372400000  # 2012-01-01T00:00:00.000Z
-                logging.warning("C")
+                self.from_date = 1325376000  # 2012-01-01 00:00:00 UTC
+
+        from_date_ts = datetime.datetime.utcfromtimestamp(self.from_date).strftime(
+            "%Y-%m-%d %H:%M:%S"
+        )
+        logging.info("Filtering 'learninghistorys' with from_date = %s", from_date_ts)
 
         filters = f"?$filter=criteria/targetUserID eq '{self.target_user_id}' and criteria/fromDate eq {self.from_date} &$count=true"
         return main_path + filters
