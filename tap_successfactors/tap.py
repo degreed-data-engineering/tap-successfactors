@@ -5,24 +5,24 @@ from singer_sdk import typing as th
 
 from tap_successfactors.streams import (
     Catalogs,
-    CatalogsCoursesFeed,
-    CatalogsCurriculaFeed,
-    CatalogsProgramsFeed,
-    LearningHistorys,
-    ScheduledOfferings,
-    UserTodoLearningItems,
+    # CatalogsCoursesFeed,
+    # CatalogsCurriculaFeed,
+    # CatalogsProgramsFeed,
+    # LearningHistorys,
+    # ScheduledOfferings,
+    # UserTodoLearningItems,
 )
 
 PLUGIN_NAME = "tap-successfactors"
 
 STREAM_TYPES = [
     Catalogs,
-    CatalogsCoursesFeed,
-    CatalogsCurriculaFeed,
-    CatalogsProgramsFeed,
-    LearningHistorys,
-    ScheduledOfferings,
-    UserTodoLearningItems,
+    # CatalogsCoursesFeed,
+    # CatalogsCurriculaFeed,
+    # CatalogsProgramsFeed,
+    # LearningHistorys,
+    # ScheduledOfferings,
+    # UserTodoLearningItems,
 ]
 
 
