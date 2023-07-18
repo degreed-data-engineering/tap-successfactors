@@ -51,7 +51,24 @@ class TapSuccessFactorsStream(RESTStream):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.columns = ["feed", "id"]
+        self.columns = [
+            "Feed",
+            "ID",
+            "Title",
+            "Description",
+            "thumbnailURI",
+            "typeID",
+            "revisionDate",
+            "deliveryMethodID",
+            "deliveryMethodDesc",
+            "totalLength",
+            "creditHours",
+            "cpeHours",
+            "active",
+            "subjectAreaID",
+            "subjectAreaDesc",
+        ]
+
         self.results_df = pd.DataFrame(columns=self.columns)
 
         self.language = self.config["language"]
@@ -166,16 +183,28 @@ class Catalogs(TapSuccessFactorsStream):
     primary_keys = ["ID"]
     records_jsonpath = "$[*]"
     schema = th.PropertiesList(
-        th.Property("feed", th.StringType),
-        th.Property("id", th.StringType),
+        th.Property("Feed", th.StringType),
+        th.Property("ID", th.StringType),
+        th.Property("Title", th.StringType),
+        th.Property("Description", th.StringType),
+        th.Property("thumbnailURI", th.StringType),
+        th.Property("typeID", th.StringType),
+        th.Property("revisionDate", th.IntegerType),
+        th.Property("deliveryMethodID", th.StringType),
+        th.Property("deliveryMethodDesc", th.StringType),
+        th.Property("totalLength", th.NumberType),
+        th.Property("creditHours", th.NumberType),
+        th.Property("cpeHours", th.NumberType),
+        th.Property("active", th.BooleanType),
+        th.Property("subjectAreaID", th.StringType),
+        th.Property("subjectAreaDesc", th.StringType),
     ).to_dict()
 
     def _get_response(self, url):
-        logging.info(f"Getting response from {url}")
         headers = {"Authorization": "{}".format(self.admin_token)}
         try:
             response = requests.request("GET", url, headers=headers)
-            # self.validate_response(response)
+            self.validate_response(response)
             return response
         except Exception as e:
             logging.error(e)
@@ -183,12 +212,33 @@ class Catalogs(TapSuccessFactorsStream):
     def _get_catalogs_courses_feed(self, catalogId):
         url = f"{self.url_base}/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalogId}')/CoursesFeed?$filter=criteria/localeID eq '{self.language}'"
         response = self._get_response(url)
+
         for course in response.json()["value"]:
+            subjectAreaID = None
+            subjectAreaDesc = None
+            if len(course["SubjectAreasFeed"]) > 0:
+                if "subjectAreaID" in course["SubjectAreasFeed"][0]:
+                    subjectAreaID = course["SubjectAreasFeed"][0]["subjectAreaID"]
+                if "subjectAreaDesc" in course["SubjectAreasFeed"][0]:
+                    subjectAreaDesc = course["SubjectAreasFeed"][0]["subjectAreaDesc"]
             new_row = pd.DataFrame(
                 [
                     {
-                        "feed": "courses",
-                        "id": course["componentID"],
+                        "Feed": "courses",
+                        "ID": course["componentID"],
+                        "Title": course["title"],
+                        "Description": course["description"],
+                        "thumbnailURI": course["thumbnailURI"],
+                        "typeID": course["componentTypeID"],
+                        "revisionDate": course["revisionDate"],
+                        "deliveryMethodID": course["deliveryMethodID"],
+                        "deliveryMethodDesc": course["deliveryMethodDesc"],
+                        "totalLength": course["totalLength"],
+                        "creditHours": course["creditHours"],
+                        "cpeHours": course["cpeHours"],
+                        "active": course["active"],
+                        "subjectAreaID": subjectAreaID,
+                        "subjectAreaDesc": subjectAreaDesc,
                     }
                 ]
             )
@@ -203,8 +253,21 @@ class Catalogs(TapSuccessFactorsStream):
             new_row = pd.DataFrame(
                 [
                     {
-                        "feed": "curricula",
-                        "id": curricula["curriculumID"],
+                        "Feed": "curricula",
+                        "ID": curricula["curriculumID"],
+                        "Title": curricula["curriculumTitle"],
+                        "Description": curricula["description"],
+                        "thumbnailURI": curricula["thumbnailURI"],
+                        "typeID": None,
+                        "revisionDate": None,
+                        "deliveryMethodID": None,
+                        "deliveryMethodDesc": None,
+                        "totalLength": None,
+                        "creditHours": None,
+                        "cpeHours": None,
+                        "active": None,
+                        "subjectAreaID": None,
+                        "subjectAreaDesc": None,
                     }
                 ]
             )
@@ -219,8 +282,21 @@ class Catalogs(TapSuccessFactorsStream):
             new_row = pd.DataFrame(
                 [
                     {
-                        "feed": "programs",
-                        "id": program["programID"],
+                        "Feed": "programs",
+                        "ID": program["programID"],
+                        "Title": program["programTitle"],
+                        "Description": program["description"],
+                        "thumbnailURI": program["thumbnailURI"],
+                        "typeID": None,
+                        "revisionDate": None,
+                        "deliveryMethodID": None,
+                        "deliveryMethodDesc": None,
+                        "totalLength": None,
+                        "creditHours": None,
+                        "cpeHours": None,
+                        "active": None,
+                        "subjectAreaID": None,
+                        "subjectAreaDesc": None,
                     }
                 ]
             )
@@ -229,13 +305,12 @@ class Catalogs(TapSuccessFactorsStream):
             )
 
     def _get_catalogs(self, response):
-        logging.info("hello world")
-        # for catalogId in response.json()["value"]:
-        test = "CORE"
-        logging.info(f"Getting catalogId: {test}")
-        self._get_catalogs_courses_feed(test)
-        self._get_catalogs_curricula_feed(test)
-        self._get_catalogs_programs_feed(test)
+        for catalogId in response.json()["value"]:
+            catalogId = catalogId["catalogID"]
+            logging.info(f"Getting catalogId: {catalogId}")
+            self._get_catalogs_courses_feed(catalogId)
+            self._get_catalogs_curricula_feed(catalogId)
+            self._get_catalogs_programs_feed(catalogId)
 
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
         """Parse the response and return an iterator of result records."""
