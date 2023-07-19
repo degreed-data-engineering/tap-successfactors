@@ -5,24 +5,24 @@ from singer_sdk import typing as th
 
 from tap_successfactors.streams import (
     Catalogs,
-    CatalogsCoursesFeed,
-    CatalogsCurriculaFeed,
-    CatalogsProgramsFeed,
-    LearningHistorys,
-    ScheduledOfferings,
-    UserTodoLearningItems,
+    # CatalogsCoursesFeed,
+    # CatalogsCurriculaFeed,
+    # CatalogsProgramsFeed,
+    # LearningHistorys,
+    # ScheduledOfferings,
+    # UserTodoLearningItems,
 )
 
 PLUGIN_NAME = "tap-successfactors"
 
 STREAM_TYPES = [
     Catalogs,
-    CatalogsCoursesFeed,
-    CatalogsCurriculaFeed,
-    CatalogsProgramsFeed,
-    LearningHistorys,
-    ScheduledOfferings,
-    UserTodoLearningItems,
+    # CatalogsCoursesFeed,
+    # CatalogsCurriculaFeed,
+    # CatalogsProgramsFeed,
+    # LearningHistorys,
+    # ScheduledOfferings,
+    # UserTodoLearningItems,
 ]
 
 
@@ -64,6 +64,12 @@ class TapSuccessfactors(Tap):
             th.StringType,
             required=True,
             description="Target user ID (i.e. sfadmin)",
+        ),
+        th.Property(
+            "from_date",
+            th.IntegerType,
+            required=False,
+            description="Datetime (specified in unix milliseconds) to use as the start of the date range for the tap",
         ),
     ).to_dict()
 

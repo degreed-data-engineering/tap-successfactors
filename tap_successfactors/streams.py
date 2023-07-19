@@ -1,15 +1,20 @@
 """Stream class for tap-successfactors."""
 
+import datetime
 import logging
+import pandas as pd
 import requests
 import json
+import time
 import urllib.parse
 
 from http import HTTPStatus
 from pathlib import Path
 from singer_sdk.exceptions import RetriableAPIError, FatalAPIError
+from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
-from typing import Optional
+from singer_sdk import typing as th
+from typing import Optional, Dict, Any, Iterable
 from urllib.parse import urlparse
 
 logging.basicConfig(level=logging.INFO)
@@ -45,6 +50,27 @@ class TapSuccessFactorsStream(RESTStream):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.columns = [
+            "Feed",
+            "ID",
+            "Title",
+            "Description",
+            "thumbnailURI",
+            "typeID",
+            "revisionDate",
+            "deliveryMethodID",
+            "deliveryMethodDesc",
+            "totalLength",
+            "creditHours",
+            "cpeHours",
+            "active",
+            "subjectAreaID",
+            "subjectAreaDesc",
+        ]
+
+        self.results_df = pd.DataFrame(columns=self.columns)
+
         self.language = self.config["language"]
         self.target_user_id = self.config["target_user_id"]
         if not hasattr(self, "admin_token"):
@@ -153,112 +179,276 @@ class TapSuccessFactorsStream(RESTStream):
 
 class Catalogs(TapSuccessFactorsStream):
     name = "catalogs"
-    primary_keys = ["catalogID"]
-    records_jsonpath = "$.value[0:]"
     path = "/learning/odatav4/public/admin/catalog-service/v1/Catalogs"
-    schema_filepath = SCHEMAS_DIR / "catalogs.json"
+    primary_keys = ["ID"]
+    records_jsonpath = "$[*]"
+    schema = th.PropertiesList(
+        th.Property("Feed", th.StringType),
+        th.Property("ID", th.StringType),
+        th.Property("Title", th.StringType),
+        th.Property("Description", th.StringType),
+        th.Property("thumbnailURI", th.StringType),
+        th.Property("typeID", th.StringType),
+        th.Property("revisionDate", th.IntegerType),
+        th.Property("deliveryMethodID", th.StringType),
+        th.Property("deliveryMethodDesc", th.StringType),
+        th.Property("totalLength", th.NumberType),
+        th.Property("creditHours", th.NumberType),
+        th.Property("cpeHours", th.NumberType),
+        th.Property("active", th.BooleanType),
+        th.Property("subjectAreaID", th.StringType),
+        th.Property("subjectAreaDesc", th.StringType),
+    ).to_dict()
 
-    def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
-        """Return a context dictionary for child streams."""
-        return {"catalog_name": record["catalogID"]}
+    def _get_response(self, url):
+        headers = {"Authorization": "{}".format(self.admin_token)}
+        try:
+            response = requests.request("GET", url, headers=headers)
+            self.validate_response(response)
+            return response
+        except Exception as e:
+            logging.error(e)
+
+    def _get_catalogs_courses_feed(self, catalogId):
+        url = f"{self.url_base}/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalogId}')/CoursesFeed?$filter=criteria/localeID eq '{self.language}'"
+        response = self._get_response(url)
+
+        for course in response.json()["value"]:
+            subjectAreaID = None
+            subjectAreaDesc = None
+            if len(course["SubjectAreasFeed"]) > 0:
+                if "subjectAreaID" in course["SubjectAreasFeed"][0]:
+                    subjectAreaID = course["SubjectAreasFeed"][0]["subjectAreaID"]
+                if "subjectAreaDesc" in course["SubjectAreasFeed"][0]:
+                    subjectAreaDesc = course["SubjectAreasFeed"][0]["subjectAreaDesc"]
+            new_row = pd.DataFrame(
+                [
+                    {
+                        "Feed": "courses",
+                        "ID": course["componentID"],
+                        "Title": course["title"],
+                        "Description": course["description"],
+                        "thumbnailURI": course["thumbnailURI"],
+                        "typeID": course["componentTypeID"],
+                        "revisionDate": course["revisionDate"],
+                        "deliveryMethodID": course["deliveryMethodID"],
+                        "deliveryMethodDesc": course["deliveryMethodDesc"],
+                        "totalLength": course["totalLength"],
+                        "creditHours": course["creditHours"],
+                        "cpeHours": course["cpeHours"],
+                        "active": course["active"],
+                        "subjectAreaID": subjectAreaID,
+                        "subjectAreaDesc": subjectAreaDesc,
+                    }
+                ]
+            )
+            self.results_df = pd.concat(
+                [self.results_df, new_row], axis=0, ignore_index=True
+            )
+
+    def _get_catalogs_curricula_feed(self, catalogId):
+        url = f"{self.url_base}/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalogId}')/CurriculaFeed?$filter=criteria/localeID eq '{self.language}'"
+        response = self._get_response(url)
+        for curricula in response.json()["value"]:
+            new_row = pd.DataFrame(
+                [
+                    {
+                        "Feed": "curricula",
+                        "ID": curricula["curriculumID"],
+                        "Title": curricula["curriculumTitle"],
+                        "Description": curricula["description"],
+                        "thumbnailURI": curricula["thumbnailURI"],
+                        "typeID": None,
+                        "revisionDate": None,
+                        "deliveryMethodID": None,
+                        "deliveryMethodDesc": None,
+                        "totalLength": None,
+                        "creditHours": None,
+                        "cpeHours": None,
+                        "active": None,
+                        "subjectAreaID": None,
+                        "subjectAreaDesc": None,
+                    }
+                ]
+            )
+            self.results_df = pd.concat(
+                [self.results_df, new_row], axis=0, ignore_index=True
+            )
+
+    def _get_catalogs_programs_feed(self, catalogId):
+        url = f"{self.url_base}/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalogId}')/ProgramsFeed?$filter=criteria/localeID eq '{self.language}'"
+        response = self._get_response(url)
+        for program in response.json()["value"]:
+            new_row = pd.DataFrame(
+                [
+                    {
+                        "Feed": "programs",
+                        "ID": program["programID"],
+                        "Title": program["programTitle"],
+                        "Description": program["description"],
+                        "thumbnailURI": program["thumbnailURI"],
+                        "typeID": None,
+                        "revisionDate": None,
+                        "deliveryMethodID": None,
+                        "deliveryMethodDesc": None,
+                        "totalLength": None,
+                        "creditHours": None,
+                        "cpeHours": None,
+                        "active": None,
+                        "subjectAreaID": None,
+                        "subjectAreaDesc": None,
+                    }
+                ]
+            )
+            self.results_df = pd.concat(
+                [self.results_df, new_row], axis=0, ignore_index=True
+            )
+
+    def _get_catalogs(self, response):
+        for catalogId in response.json()["value"]:
+            catalogId = catalogId["catalogID"]
+            logging.info(f"Getting catalogId: {catalogId}")
+            self._get_catalogs_courses_feed(catalogId)
+            self._get_catalogs_curricula_feed(catalogId)
+            self._get_catalogs_programs_feed(catalogId)
+
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+        """Parse the response and return an iterator of result records."""
+
+        if response.json():
+            self._get_catalogs(response)
+            input = self.results_df.to_dict(orient="records")
+            for row in input:
+                yield from extract_jsonpath(self.records_jsonpath, input=row)
 
 
-class CatalogsCoursesFeed(TapSuccessFactorsStream):
-    parent_stream_type = Catalogs
-    name = "catalogs_courses_feed"
-    primary_keys = ["componentID"]
-    records_jsonpath = "$.value[0:]"
-    schema_filepath = SCHEMAS_DIR / "catalogs_courses_feed.json"
+# class Catalogs(TapSuccessFactorsStream):
+#     name = "catalogs"
+#     primary_keys = ["catalogID"]
+#     records_jsonpath = "$.value[0:]"
+#     path = "/learning/odatav4/public/admin/catalog-service/v1/Catalogs"
+#     schema_filepath = SCHEMAS_DIR / "catalogs.json"
 
-    @property
-    def path(self) -> str:
-        """Return API URL path component for stream."""
-        main_path = "/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalog_name}')/CoursesFeed"
-        filters = f"?$filter=criteria/localeID eq '{self.language}'"
-        return main_path + filters
-
-    def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
-        """Return a context dictionary for child streams."""
-        return {
-            "componentID": record["componentID"],
-            "componentTypeID": record["componentTypeID"],
-            "revisionDate": record["revisionDate"],
-        }
+#     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
+#         """Return a context dictionary for child streams."""
+#         return {"catalog_name": record["catalogID"]}
 
 
-class CatalogsCurriculaFeed(TapSuccessFactorsStream):
-    parent_stream_type = Catalogs
-    name = "catalogs_curricula_feed"
-    primary_keys = ["curriculumID"]
-    records_jsonpath = "$.value[0:]"
-    schema_filepath = SCHEMAS_DIR / "catalogs_curricula_feed.json"
+# class CatalogsCoursesFeed(TapSuccessFactorsStream):
+#     parent_stream_type = Catalogs
+#     name = "catalogs_courses_feed"
+#     primary_keys = ["componentID"]
+#     records_jsonpath = "$.value[0:]"
+#     schema_filepath = SCHEMAS_DIR / "catalogs_courses_feed.json"
 
-    @property
-    def path(self) -> str:
-        """Return API URL path component for stream."""
-        main_path = "/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalog_name}')/CurriculaFeed"
-        filters = f"?$filter=criteria/localeID eq '{self.language}'"
-        return main_path + filters
+#     @property
+#     def path(self) -> str:
+#         """Return API URL path component for stream."""
+#         main_path = "/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalog_name}')/CoursesFeed"
+#         filters = f"?$filter=criteria/localeID eq '{self.language}'"
+#         return main_path + filters
 
-
-class CatalogsProgramsFeed(TapSuccessFactorsStream):
-    parent_stream_type = Catalogs
-    name = "catalogs_programs_feed"
-    primary_keys = ["programID"]
-    records_jsonpath = "$.value[0:]"
-    schema_filepath = SCHEMAS_DIR / "catalogs_programs_feed.json"
-
-    @property
-    def path(self) -> str:
-        """Return API URL path component for stream."""
-        main_path = "/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalog_name}')/ProgramsFeed"
-        filters = f"?$filter=criteria/localeID eq '{self.language}'"
-        return main_path + filters
+#     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
+#         """Return a context dictionary for child streams."""
+#         return {
+#             "componentID": record["componentID"],
+#             "componentTypeID": record["componentTypeID"],
+#             "revisionDate": record["revisionDate"],
+#         }
 
 
-class LearningHistorys(TapSuccessFactorsStream):
-    name = "learning_historys"
-    primary_keys = ["componentID"]
-    records_jsonpath = "$.value[0:]"
-    schema_filepath = SCHEMAS_DIR / "learning_historys.json"
+# class CatalogsCurriculaFeed(TapSuccessFactorsStream):
+#     parent_stream_type = Catalogs
+#     name = "catalogs_curricula_feed"
+#     primary_keys = ["curriculumID"]
+#     records_jsonpath = "$.value[0:]"
+#     schema_filepath = SCHEMAS_DIR / "catalogs_curricula_feed.json"
 
-    @property
-    def path(self) -> str:
-        """Return API URL path component for stream."""
-        main_path = (
-            "/learning/odatav4/public/user/userlearning-service/v1/learninghistorys"
-        )
-        filters = (
-            f"?$filter=criteria/targetUserID eq '{self.target_user_id}'&$count=true"
-        )
-        return main_path + filters
+#     @property
+#     def path(self) -> str:
+#         """Return API URL path component for stream."""
+#         main_path = "/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalog_name}')/CurriculaFeed"
+#         filters = f"?$filter=criteria/localeID eq '{self.language}'"
+#         return main_path + filters
 
 
-class ScheduledOfferings(TapSuccessFactorsStream):
-    parent_stream_type = CatalogsCoursesFeed
-    name = "scheduled_offerings"
-    primary_keys = ["scheduleID"]
-    records_jsonpath = "$.value[0:]"
-    path = "/learning/odatav4/public/user/learningplan-service/v1/Scheduledofferings?$filter=lisCriteria/itemID eq '{componentID}' and lisCriteria/itemTypeID eq '{componentTypeID}' and lisCriteria/revisionDate eq {revisionDate}"
-    schema_filepath = SCHEMAS_DIR / "scheduled_offerings.json"
+# class CatalogsProgramsFeed(TapSuccessFactorsStream):
+#     parent_stream_type = Catalogs
+#     name = "catalogs_programs_feed"
+#     primary_keys = ["programID"]
+#     records_jsonpath = "$.value[0:]"
+#     schema_filepath = SCHEMAS_DIR / "catalogs_programs_feed.json"
 
-    @property
-    def http_headers(self) -> dict:
-        """Return the http headers needed."""
-        headers = {}
-        headers["Authorization"] = f"{self.user_token}"
-        return headers
+#     @property
+#     def path(self) -> str:
+#         """Return API URL path component for stream."""
+#         main_path = "/learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed('{catalog_name}')/ProgramsFeed"
+#         filters = f"?$filter=criteria/localeID eq '{self.language}'"
+#         return main_path + filters
 
 
-class UserTodoLearningItems(TapSuccessFactorsStream):
-    name = "user_todo_learning_items"
-    primary_keys = ["sku"]
-    records_jsonpath = "$.value[0:]"
-    schema_filepath = SCHEMAS_DIR / "user_todo_learning_items.json"
+# class LearningHistorys(TapSuccessFactorsStream):
+#     name = "learning_historys"
+#     primary_keys = ["componentID"]
+#     records_jsonpath = "$.value[0:]"
+#     schema_filepath = SCHEMAS_DIR / "learning_historys.json"
+#     replication_key = "fromDate"
 
-    @property
-    def path(self) -> str:
-        """Return API URL path component for stream."""
-        main_path = "/learning/odatav4/public/user/learningplan-service/v1/UserTodoLearningItems"
-        filters = f"?$filter=criteria/maxRowNum eq 999999 and criteria/targetUserID eq '{self.target_user_id}'"
-        return main_path + filters
+#     @property
+#     def path(self) -> str:
+#         """Return API URL path component for stream."""
+#         main_path = (
+#             "/learning/odatav4/public/user/userlearning-service/v1/learninghistorys"
+#         )
+
+#         self.to_date = int(time.time())
+
+#         if "from_date" in self.config:
+#             self.from_date = self.config["from_date"]
+#         else:
+#             if "replication_key_value" in self.stream_state:
+#                 self.from_date = self.stream_state["replication_key_value"]
+#             else:
+#                 self.from_date = 1325376000  # 2012-01-01 00:00:00 UTC
+
+#         from_date_ts = datetime.datetime.utcfromtimestamp(self.from_date).strftime(
+#             "%Y-%m-%d %H:%M:%S"
+#         )
+#         logging.info("Filtering 'learninghistorys' with from_date = %s", from_date_ts)
+
+#         filters = f"?$filter=criteria/targetUserID eq '{self.target_user_id}' and criteria/fromDate eq {self.from_date} &$count=true"
+#         return main_path + filters
+
+#     def post_process(self, row: dict, context: Optional[dict]) -> dict:
+#         row["fromDate"] = self.to_date
+#         return row
+
+
+# class ScheduledOfferings(TapSuccessFactorsStream):
+#     parent_stream_type = CatalogsCoursesFeed
+#     name = "scheduled_offerings"
+#     primary_keys = ["scheduleID"]
+#     records_jsonpath = "$.value[0:]"
+#     path = "/learning/odatav4/public/user/learningplan-service/v1/Scheduledofferings?$filter=lisCriteria/itemID eq '{componentID}' and lisCriteria/itemTypeID eq '{componentTypeID}' and lisCriteria/revisionDate eq {revisionDate}"
+#     schema_filepath = SCHEMAS_DIR / "scheduled_offerings.json"
+
+#     @property
+#     def http_headers(self) -> dict:
+#         """Return the http headers needed."""
+#         headers = {}
+#         headers["Authorization"] = f"{self.user_token}"
+#         return headers
+
+
+# class UserTodoLearningItems(TapSuccessFactorsStream):
+#     name = "user_todo_learning_items"
+#     primary_keys = ["sku"]
+#     records_jsonpath = "$.value[0:]"
+#     schema_filepath = SCHEMAS_DIR / "user_todo_learning_items.json"
+
+#     @property
+#     def path(self) -> str:
+#         """Return API URL path component for stream."""
+#         main_path = "/learning/odatav4/public/user/learningplan-service/v1/UserTodoLearningItems"
+#         filters = f"?$filter=criteria/maxRowNum eq 999999 and criteria/targetUserID eq '{self.target_user_id}'"
+#         return main_path + filters
